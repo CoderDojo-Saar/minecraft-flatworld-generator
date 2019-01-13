@@ -24,7 +24,7 @@
 	</style>
 </head>
 <body>
-<h1>Minecraft Flatworld Generator</h1>
+<h1>Minecraft Flatworld Generator(1.12.2)</h1>
 <p>Generiert ein Kommando zur Erstellung einer Flatworld.
 	Kopiere den Text in Minecraft</p>
 	<form>
@@ -50,10 +50,12 @@
         var fuegeListenEintragHinzu = function(eintrag) {
             var li=document.createElement("li");			
 			li.textContent=eintrag;
-            blockListe.push(eintrag);
 			var fragment=document.createDocumentFragment();
             fragment.appendChild(li);
-            liste.appendChild(fragment);
+
+            // Füge Blöcke am Anfang
+            blockListe.push(eintrag);
+            liste.prepend(fragment);
         }
 
 			document.getElementById("luft").addEventListener("click",function(event){
@@ -88,26 +90,30 @@
                 var blockTyp = blockListe[i];
                 switch(blockTyp) {
                     case 'luft':
-                        code=code+"minecraft:air,"
+                        code=code+"minecraft:air"
 						break;
                     case 'gras':
-						code=code+"minecraft:grass,"
+						code=code+"minecraft:grass"
                         break;
                     case 'erde':
-						code=code+"minecraft:dirt,"
+						code=code+"minecraft:dirt"
                         break;
                     case 'stein':
-						code=code+"minecraft:stone,"
+						code=code+"minecraft:stone"
                         break;
                     case 'grundgestein':
-						code=code+"minecraft:bedrock,"
+						code=code+"minecraft:bedrock"
                         break;
                     default:
                         break;
                 }
+
+                if(i<blockListe.length - 1) {
+                    code = code + ',';
+                }
             }
 			
-			code=code+"1;village"
+			code=code+";village"
 
             // Unter blockListe findet ihr alle vom Nutzer hinzugefügten Blöcke
             document.getElementById('minecraftcode').innerHTML = code;
