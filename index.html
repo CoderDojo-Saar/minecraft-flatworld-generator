@@ -35,10 +35,15 @@
 	</ol>
 	<textarea></textarea>
 	<script>
+        var liste = document.getElementById('blockliste');
+        var blockListe = [];
 		document.getElementById("luft").addEventListener("click",function(event){
 			var li=document.createElement("li");			
 			li.textContent="Luft";
-			var fragment=document.
+            blockListe.push('Luft');
+			var fragment=document.createDocumentFragment();
+            fragment.appendChild(li);
+            liste.appendChild(fragment);
 		})
 		/*document.getElementById("gras")
 		document.getElementById("erde")
