@@ -17,8 +17,15 @@
 		color: rgb(128, 16, 16);
 		background-color:rgb(128, 92, 27)
 	}
-	#stein{color:rgb(27, 27, 27);
-	background-color: gray;}
+	#stein{
+        color:rgb(27, 27, 27);
+	    background-color: gray;
+    }
+
+    [type="submit"] {
+        width: 30vw;
+        box-shadow: 2px 2px 5px black;
+    }
 	</style>
 </head>
 <body>
@@ -26,12 +33,20 @@
 <p>Generiert ein Kommando zur Erstellung einer Flatworld.
 	Kopiere den Text in Minecraft</p>
 	<form>
-		<button id="luft" type="button">Luft</button><br>
-		<button id="gras" type="button">Gras</button><br>
-		<button id="erde" type="button">Erde</button><br>
-		<button id="stein" type="button">Stein</button><br>
+        <label for="version">Wähle deine Minecraft version</label><br/>
+        <select id="version" name="version">
+            <option value="alt">v1.12 oder älter</option>
+            <option value="neuste" selected="selected">v1.13</option>
+        </select>
+        <hr/>
+        <p>Wähle deine Blöcke vom Boden bis zum Himmel:</p>
+        <br/>
+		<button id="luft" type="button">Luft</button><br><br/>
+		<button id="gras" type="button">Gras</button><br><br/>
+		<button id="erde" type="button">Erde</button><br><br/>
+		<button id="stein" type="button">Stein</button><br><br/>
 		<button id="grundgestein"type="button">Grundgestein</button><br>
-		<br>
+        <hr/>
 		<button type="submit">Codegenerierung</button><br>
 	</form>
 	<ol id="blockliste"></ol>
@@ -71,18 +86,19 @@
 			document.getElementById("grundgestein").addEventListener("click",function(event){
 					fuegeListenEintragHinzu('grundgestein');
 				});
-		/*document.getElementById("gras")
-		document.getElementById("erde")
-		document.getElementById("stein")
-		document.getElementById("grundgestein")*/
 
         // Wenn Formular abgeschickt wird...
         formular.addEventListener('submit', function(e){
             e.preventDefault();
             // ... generieren wir den Minecraft code
+
+            var minecraftVersion = document.getElementById('version').value;
             
             // Den Minecraft code schreiben wir in diese Variable
-            var code = '3;';
+            var code = '';
+            if(minecraftVersion === "alt") {
+                code = code + '3;';
+            }
 
             for(var i=0; i < blockListe.length; i++) {
                 var blockTyp = blockListe[i];
