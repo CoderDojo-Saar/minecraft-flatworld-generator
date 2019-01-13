@@ -37,9 +37,10 @@
 	<ol id="blockliste">
 		<li>testtest</li>
 	</ol>
-	<textarea></textarea>
+	<textarea id="minecraftcode" readonly></textarea>
 	<script>
         var liste = document.getElementById('blockliste');
+        var formular = document.forms[0];
         /*
          * NOTE: Die blockListe ist ein Array welches alle Einträge der Liste
          * auf JavaScript Ebene beinhaltet.
@@ -62,6 +63,37 @@
 		document.getElementById("erde")
 		document.getElementById("stein")
 		document.getElementById("grundgestein")*/
+
+        // Wenn Formular abgeschickt wird...
+        formular.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            // ... generieren wir den Minecraft code
+            
+            // Den Minecraft code schreiben wir in diese Variable
+            var code = '';
+
+            for(var i=0; i < blockListe.length; i++) {
+                var blockTyp = blockListe[i];
+                switch(blockTyp) {
+                    case 'luft':
+                        break;
+                    case 'gras':
+                        break;
+                    case 'erde':
+                        break;
+                    case 'stein':
+                        break;
+                    case 'grundgestein':
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // Unter blockListe findet ihr alle vom Nutzer hinzugefügten Blöcke
+            document.getElementById('minecraftcode').innerHTML = code;
+        });
 	</script>
 </body>
 </html>
