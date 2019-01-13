@@ -39,10 +39,24 @@
 	</ol>
 	<textarea></textarea>
 	<script>
+        var liste = document.getElementById('blockliste');
+        /*
+         * NOTE: Die blockListe ist ein Array welches alle Einträge der Liste
+         * auf JavaScript Ebene beinhaltet.
+         * Diese kann genutzt werden um den Textschnipsel zu generieren.
+         */
+        var blockListe = [];
+        var fuegeListenEintragHinzu = function(eintrag) {
+            var li=document.createElement("li");			
+			li.textContent=eintrag;
+            blockListe.push(eintrag);
+			var fragment=document.createDocumentFragment();
+            fragment.appendChild(li);
+            liste.appendChild(fragment);
+        }
+
 		document.getElementById("luft").addEventListener("click",function(event){
-			var li=document.createElement("li");			
-			li.textContent="Luft";
-			var fragment=document.
+			fuegeListenEintragHinzu('luft');
 		})
 		/*document.getElementById("gras")
 		document.getElementById("erde")
