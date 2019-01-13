@@ -30,13 +30,11 @@
 		<button id="gras" type="button">Gras</button><br>
 		<button id="erde" type="button">Erde</button><br>
 		<button id="stein" type="button">Stein</button><br>
-		<button id="grund"type="button">Grundgestein</button><br>
+		<button id="grundgestein"type="button">Grundgestein</button><br>
 		<br>
 		<button type="submit">Codegenerierung</button><br>
 	</form>
-	<ol id="blockliste">
-		<li>testtest</li>
-	</ol>
+	<ol id="blockliste"></ol>
 	<textarea id="minecraftcode" readonly></textarea>
 	<script>
         var liste = document.getElementById('blockliste');
@@ -56,9 +54,21 @@
             liste.appendChild(fragment);
         }
 
-		document.getElementById("luft").addEventListener("click",function(event){
-			fuegeListenEintragHinzu('luft');
-		})
+			document.getElementById("luft").addEventListener("click",function(event){
+					fuegeListenEintragHinzu('luft');
+				});
+			document.getElementById("gras").addEventListener("click",function(event){
+					fuegeListenEintragHinzu('gras');
+				});
+			document.getElementById("erde").addEventListener("click",function(event){
+					fuegeListenEintragHinzu('erde');
+				});
+			document.getElementById("stein").addEventListener("click",function(event){
+					fuegeListenEintragHinzu('stein');
+				});
+			document.getElementById("grundgestein").addEventListener("click",function(event){
+					fuegeListenEintragHinzu('grundgestein');
+				});
 		/*document.getElementById("gras")
 		document.getElementById("erde")
 		document.getElementById("stein")
@@ -67,29 +77,35 @@
         // Wenn Formular abgeschickt wird...
         formular.addEventListener('submit', function(e){
             e.preventDefault();
-
             // ... generieren wir den Minecraft code
             
             // Den Minecraft code schreiben wir in diese Variable
-            var code = '';
+            var code = '3;';
 
             for(var i=0; i < blockListe.length; i++) {
                 var blockTyp = blockListe[i];
                 switch(blockTyp) {
                     case 'luft':
-                        break;
+                        code=code+"minecraft:air,"
+						break;
                     case 'gras':
+						code=code+"minecraft:grass,"
                         break;
                     case 'erde':
+						code=code+"minecraft:dirt,"
                         break;
                     case 'stein':
+						code=code+"minecraft:stone,"
                         break;
                     case 'grundgestein':
+						code=code+"minecraft:bedrock,"
                         break;
                     default:
                         break;
                 }
             }
+			
+			code=code+"1;village"
 
             // Unter blockListe findet ihr alle vom Nutzer hinzugefügten Blöcke
             document.getElementById('minecraftcode').innerHTML = code;
